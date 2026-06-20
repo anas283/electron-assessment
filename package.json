@@ -1,0 +1,23 @@
+{
+  "name": "electron-assessment",
+  "version": "1.0.0",
+  "description": "Electron Desktop Dashboard Application",
+  "main": "src/js/main.js",
+  "scripts": {
+    "electron:serve": "electron .",
+    "electron:build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.6.2",
+    "d3": "^7.9.0",
+    "electron": "^42.4.1",
+    "pouchdb": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.15.3"
+  }
+}
