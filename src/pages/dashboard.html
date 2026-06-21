@@ -1,0 +1,70 @@
+<nav class="navbar navbar-dark bg-dark dashboard-navbar">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">Dashboard</span>
+    <a href="#" id="signout-link" class="nav-link text-light">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right mr-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+      </svg>
+      Sign Out
+    </a>
+  </div>
+</nav>
+
+<div class="container dashboard-content">
+  <h4 class="section-title">Overview</h4>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card chart-card">
+        <div class="card-header">Card Title</div>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <div id="donut-chart"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card chart-card">
+        <div class="card-header">Card Title</div>
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <div id="bar-chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="section-title">User List</h4>
+  <div class="card table-card">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover mb-0" id="users-table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">User Name</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body">
+            <tr>
+              <td colspan="4" class="text-center text-muted py-4">Loading users...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const signoutLink = document.getElementById('signout-link');
+    signoutLink.addEventListener('click', async function (event) {
+      event.preventDefault();
+      await window.Auth.logout();
+      await window.Router.navigate('signin');
+    });
+
+    window.Dashboard.init();
+  })();
+</script>

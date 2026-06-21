@@ -38,11 +38,18 @@ async function apiRequest(endpoint, options = {}) {
   return response.json();
 }
 
-function login(credentials) {
-  return apiRequest('/account/login', {
+async function login(credentials) {
+  const response = await apiRequest('/account/login', {
     method: 'POST',
     body: JSON.stringify(credentials)
   });
+
+  // The login endpoint returns the token as a plain JSON string.
+  if (typeof response === 'string') {
+    return { token: response.replace(/^"|"$/g, '') };
+  }
+
+  return response;
 }
 
 function getDashboard() {
