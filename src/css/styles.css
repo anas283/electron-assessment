@@ -7,6 +7,7 @@
 /* Dashboard styles */
 .dashboard-navbar {
   padding: 0.75rem 1rem;
+  background-color: #212529;
 }
 
 .dashboard-navbar .navbar-brand {

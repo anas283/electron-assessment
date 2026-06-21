@@ -35,6 +35,16 @@ npm run electron:serve
 npm run electron:build
 ```
 
+### Run Tests
+
+The Playwright/Electron test suite requires valid sign-in credentials via environment variables:
+
+```bash
+TEST_USERNAME=user@example.com TEST_PASSWORD=secret npm test
+```
+
+> Never commit real credentials to the repository. The test suite validates that `TEST_USERNAME` and `TEST_PASSWORD` are set before running.
+
 ## Project Structure
 
 ```
@@ -59,7 +69,7 @@ npm run electron:build
 |------------------|--------------------------------------|
 | `electron:serve` | Launches the Electron app            |
 | `electron:build` | Packages the app with electron-builder |
-| `test`           | Placeholder for future test suite    |
+| `test`           | Runs the Playwright/Electron test suite |
 
 ## Tech Stack
 

@@ -6,12 +6,14 @@ const routes = {
 const Router = {
   async navigate(view) {
     const app = document.getElementById('app');
+    const authenticated = await window.Auth.isAuthenticated();
 
-    if (view === 'dashboard') {
-      const authenticated = await window.Auth.isAuthenticated();
-      if (!authenticated) {
-        view = 'signin';
-      }
+    if (view === 'dashboard' && !authenticated) {
+      view = 'signin';
+    }
+
+    if (view === 'signin' && authenticated) {
+      view = 'dashboard';
     }
 
     try {

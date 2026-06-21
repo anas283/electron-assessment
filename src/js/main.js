@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -7,14 +7,30 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    minWidth: 900,
+    minHeight: 600,
+    center: true,
+    title: 'Electron Dashboard',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      nodeIntegrationInWorker: false,
+      nodeIntegrationInSubFrames: false,
+      enableRemoteModule: false,
+      allowRunningInsecureContent: false,
+      webSecurity: true
     }
   });
 
   mainWindow.loadFile(path.join(__dirname, '..', 'index.html'));
+
+  // Remove the default application menu for a focused desktop-app experience.
+  Menu.setApplicationMenu(null);
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;

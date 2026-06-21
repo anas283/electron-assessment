@@ -39,17 +39,24 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 async function login(credentials) {
-  const response = await apiRequest('/account/login', {
-    method: 'POST',
-    body: JSON.stringify(credentials)
-  });
+  try {
+    const response = await apiRequest('/account/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials)
+    });
 
-  // The login endpoint returns the token as a plain JSON string.
-  if (typeof response === 'string') {
-    return { token: response.replace(/^"|"$/g, '') };
+    // The login endpoint returns the token as a plain JSON string.
+    if (typeof response === 'string') {
+      return { token: response.replace(/^"|"$/g, '') };
+    }
+
+    return response;
+  } catch (err) {
+    if (err.message && err.message.includes('status: 401')) {
+      throw new Error('Invalid username or password. Please try again.');
+    }
+    throw err;
   }
-
-  return response;
 }
 
 function getDashboard() {
